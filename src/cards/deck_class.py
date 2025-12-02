@@ -48,7 +48,7 @@ class Deck():
             raise IndexError('Drawing from an empty deck.')
 
         if n > len(self.cards):
-            warnings.warn(f'Argument "n" ({n}) is larger than current deck size ({self.size()}). Entire deck returned.')
+            warnings.warn(f'Argument "n" ({n}) is larger than current deck size ({self.size()}). Entire deck returned.', UserWarning)
             n = self.size()
         elif n < 1:
             raise ValueError(f'Invalid number of cards: {n}')
@@ -77,3 +77,6 @@ class Deck():
             self.cards.append(card)
         else:
             self.cards.insert(pos, card)
+
+    def __repr__(self) -> str:
+        return f'Deck(size={self.size()})' # most relevant state
