@@ -1,4 +1,3 @@
-
 class Card():
     '''A basic card printed as "Rank of Suit".'''
 
