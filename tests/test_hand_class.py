@@ -48,7 +48,7 @@ class TestDeckClass(unittest.TestCase):
         hand.sort()
 
         # woops, maybe I should implement some more dunders...
-        self.assertLess(hand.cards[0].value, hand.cards[4].value)
+        self.assertLess(hand.cards[0], hand.cards[4])
 
     def test_draw(self):
         deck: Deck = Deck()

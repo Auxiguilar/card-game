@@ -13,7 +13,10 @@ def main():
     for i in range(hand.capacity):
             hand.add(deck.draw())
 
-    print(str(hand))
+    print(repr(hand))
+
+    other_hand: Hand = Hand()
+    print(repr(other_hand))
 
 
 if __name__ == "__main__":

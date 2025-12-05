@@ -18,12 +18,12 @@ class Hand():
         return f'{', '.join(cards)}.'
 
     def __repr__(self) -> str:
-        return f'Hand(capacity={self.capacity})'
+        return f'Hand(capacity={self.capacity if hasattr(self, 'capacity') else None})'
 
     def sort(self):
         '''Sorts the deck according to card value.'''
 
-        self.cards.sort(key=lambda card: card.value) # huh??
+        self.cards.sort() # huh??
 
     def add(self, card: Card):
         '''Adds a card to the hand. Does not call sort.'''

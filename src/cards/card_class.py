@@ -1,5 +1,9 @@
+from functools import total_ordering
+
+
+@total_ordering
 class Card():
-    '''A basic card printed as "Rank of Suit".'''
+    '''A basic card printed as "Rank of Suit". Cards can be easily compared.'''
 
     VALUES: dict[str, int] = {
         'ace': 1,
@@ -27,3 +31,13 @@ class Card():
     
     def __repr__(self) -> str:
         return f'Card("{self.rank}", "{self.suit}")'
+    
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Card):
+            return NotImplemented
+        return (self.rank, self.suit) == (other.rank, other.suit)
+    
+    def __lt__(self, other: object) -> bool:
+        if not isinstance(other, Card):
+            return NotImplemented
+        return self.value < other.value
