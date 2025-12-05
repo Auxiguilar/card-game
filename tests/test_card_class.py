@@ -19,7 +19,7 @@ class TestCardClass(unittest.TestCase):
             'eight',
             'nine',
             'ten',
-            'knight',
+            'jack',
             'queen',
             'king'
             ]

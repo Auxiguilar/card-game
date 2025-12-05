@@ -12,33 +12,21 @@ class TestDeckClass(unittest.TestCase):
         self.assertEqual(str(top_card), 'King of Clubs')
 
     def test_draw(self):
-        deck_1: Deck = Deck()
+        deck: Deck = Deck()
+        card: Card = deck.draw()
+        self.assertEqual(str(card), 'King of Clubs')
+        self.assertEqual(len(deck), 51)
 
-        with self.assertRaises(ValueError):
-            draw_invalid: list = deck_1.draw(-3)
-
-        with self.assertWarns(UserWarning):
-            draw_too_much: list = deck_1.draw(54)
-
-        deck_2: Deck = Deck()
-        
-        draw_one: list = deck_2.draw()
-        self.assertEqual(1, len(draw_one))
-
-        draw_more: list = deck_2.draw(3)
-        self.assertEqual(3, len(draw_more))
-
-        draw_all: list = deck_2.draw(48)
-        self.assertEqual(48, len(draw_all))
+        deck.cards = []
 
         with self.assertRaises(IndexError):
-            draw_empty: list = deck_2.draw()
+            draw_empty: Card = deck.draw()
     
     def test_add(self):
         deck_1: Deck = Deck()
         deck_2: Deck = Deck()
 
-        card = deck_1.draw()[0] # <-- returns a list
+        card = deck_1.draw()
         deck_2.add(card)
 
         self.assertEqual(51, len(deck_1))
@@ -53,7 +41,7 @@ class TestDeckClass(unittest.TestCase):
         deck: Deck = Deck()
         self.assertEqual(52, len(deck))
 
-        cards: list = deck.draw(52)
+        deck.cards = []
         self.assertFalse(deck)
 
     def test_str(self):
@@ -61,5 +49,4 @@ class TestDeckClass(unittest.TestCase):
         self.assertEqual(str(deck), 'A deck with 52 cards.')
 
     # Unfortunately I'm not sure how to test the shuffle method, since it'll just introduce the possibility
-    # the whole test fails every once in a while, which defeats the purpose. Method .size() is just len();
-    # not worth testing...
+    # the whole test fails every once in a while, which defeats the purpose.

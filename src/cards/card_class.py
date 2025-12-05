@@ -12,7 +12,7 @@ class Card():
         'eight': 8,
         'nine': 9,
         'ten': 10,
-        'knight': 11,
+        'jack': 11,
         'queen': 12,
         'king': 13
     }

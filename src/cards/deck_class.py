@@ -1,5 +1,4 @@
 import random
-import warnings
 from src.cards.card_class import Card
 
 class Deck():
@@ -16,7 +15,7 @@ class Deck():
         'eight',
         'nine',
         'ten',
-        'knight',
+        'jack',
         'queen',
         'king'
     ]
@@ -29,7 +28,7 @@ class Deck():
     ]
 
     def __init__(self):
-        self.cards: list[Card] = [Card(rank, suit) for rank in Deck.RANKS for suit in Deck.SUITS]
+        self.cards: list[Card] = [Card(rank, suit) for suit in Deck.SUITS for rank in Deck.RANKS]
 
     def __len__(self) -> int:
         return len(self.cards)
@@ -45,24 +44,13 @@ class Deck():
 
         random.shuffle(self.cards)
 
-    def draw(self, n: int = 1) -> list[Card]:
-        '''Draws a given number `n` of cards from the top of the deck, removing them from the deck and returning them.'''
+    def draw(self) -> Card:
+        '''Returns the card at the top of the deck, removing it from the deck.'''
 
         if not self:
             raise IndexError('Drawing from an empty deck.')
 
-        if n > len(self):
-            warnings.warn(f'Argument "n" ({n}) is larger than current deck size ({len(self)}). Entire deck returned.', UserWarning)
-            n = len(self)
-        elif n < 1:
-            raise ValueError(f'Invalid number of cards: {n}')
-
-        cards: list[Card] = []
-
-        for i in range(n):
-            cards.append(self.cards.pop())
-        
-        return cards
+        return self.cards.pop()
     
     def peek(self) -> Card:
         '''Returns the card at the top of the deck, preserving the deck.'''
@@ -72,14 +60,10 @@ class Deck():
         
         return self.cards[-1]
         
-    def add(self, card: Card, pos: int = -1, rand: bool = False):
-        '''Adds a card to the deck, defaulting to the top. If `rand == True`, adds it to a random index in the deck.'''
+    def add(self, card: Card, rand: bool = False):
+        '''Adds a card to the top of the deck. If `rand == True`, inserts it at a random index in the deck.'''
 
         if rand == True:
             self.cards.insert(random.randint(0, len(self) - 1), card)
-        elif pos == -1 or pos == len(self) - 1:
-            self.cards.append(card)
         else:
-            self.cards.insert(pos, card)
-
-
+            self.cards.append(card)
