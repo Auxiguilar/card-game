@@ -5,6 +5,13 @@ from src.cards.card_class import Card
 
 
 class TestDeckClass(unittest.TestCase):
+    def test_init(self):
+        hand_1: Hand = Hand()
+        self.assertFalse(hasattr(hand_1, 'capacity'))
+
+        hand_2: Hand = Hand(5)
+        self.assertTrue(hasattr(hand_2, 'capacity'))
+
     def test_len(self):
         deck: Deck = Deck()
 
