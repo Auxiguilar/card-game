@@ -1,23 +1,20 @@
+import sys
+
+
 def main():
     print("Hello from card-game!")
 
-    from src.cards.card_class import Card
-    from src.cards.deck_class import Deck
-    from src.cards.hand_class import Hand
+    from src.game_logic.hi_lo import hi_lo_game
 
-    deck = Deck()
-    deck.shuffle()
-
-    hand: Hand = Hand(5)
-
-    for i in range(hand.capacity):
-            hand.add(deck.draw())
-
-    print(repr(hand))
-
-    other_hand: Hand = Hand()
-    print(repr(other_hand))
+    try:
+        hi_lo_game()
+    except Exception as e:
+        print(f'Something went wrong: {e}')
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nExiting game...')
+        sys.exit(0)
