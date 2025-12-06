@@ -48,5 +48,23 @@ class TestDeckClass(unittest.TestCase):
         deck: Deck = Deck()
         self.assertEqual(str(deck), 'A deck with 52 cards.')
 
-    # Unfortunately I'm not sure how to test the shuffle method, since it'll just introduce the possibility
-    # the whole test fails every once in a while, which defeats the purpose.
+    def test_shuffle(self):
+        shuffled_deck: Deck = Deck()
+        comparison_deck: Deck = Deck()
+        shuffled_deck.shuffle()
+
+        # since I can't find a listNotEqual, making some logic for it
+        try:
+            self.assertListEqual(shuffled_deck, comparison_deck) # type: ignore
+
+            # in the extremely unlikely event the above succeeds(fails):
+            raise RuntimeError('shuffle() has somehow produced an identical list...')
+
+            # really, I think this is appropriate, since it really means
+            # it works. not that this will ever happen often, or at all...
+            # if it did, that would be a problem, though at least then
+            # you'd know.
+        
+        # failure is expected! "failure" is good!
+        except self.failureException:
+            pass
