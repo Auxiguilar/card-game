@@ -22,6 +22,15 @@ def get_player_guess() -> str:
 
     # only because it seems absurd to let it run too long...
     raise RuntimeError(f'Too many tries: {i}.')
+
+def player_continue() -> bool:
+    confirm: str = input('Continue? (Y/n)\n> ').strip().lower()
+    result: bool = True
+
+    if confirm == 'n' or confirm == 'no':
+        result = False
+    
+    return result
         
 def compare_cards(drawn_card: Card, snap_card: Card, guess: str) -> bool:
     result: bool = False
@@ -50,7 +59,7 @@ def hi_lo_game():
             deck: Deck = Deck()
             deck.shuffle()
 
-        print(f'\n\nW: {wins}, L: {losses}')
+        print(f'\nW: {wins}, L: {losses}')
         drawn_card: Card = deck.draw()
 
         print(f'\nSnap card: {str(snap_card)}\nDrawn card: ???')
@@ -61,12 +70,15 @@ def hi_lo_game():
 
         if result:
             wins += 1
-            print('Correct guess! >>> W <<<')
+            print('Correct guess! >>> W <<<\n')
         else:
             losses += 1
-            print('Wrong guess! >>> L <<<')
+            print('Wrong guess! >>> L <<<\n')
 
-        for i in range(2):
+        if not player_continue():
+            break
+
+        for i in range(3):
             if not deck:
                 deck: Deck = Deck()
                 deck.shuffle()
