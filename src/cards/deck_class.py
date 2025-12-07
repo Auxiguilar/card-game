@@ -34,7 +34,7 @@ class Deck():
         return len(self.cards)
     
     def __repr__(self) -> str:
-        return f'Deck(size={len(self)})' # most relevant state
+        return f'Deck(size={len(self)})'
     
     def __str__(self) -> str:
         return f'A deck with {len(self)} cards.'
