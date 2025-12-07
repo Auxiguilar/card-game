@@ -1,8 +1,11 @@
 import random
 from src.cards.card_class import Card
 
+
 class Deck():
-    '''A basic 52-card deck. Is initialized unshuffled; must be shuffled with `.shuffle()` for a randomized deck. Cards are represented as class `Card` with a `rank`, `suit`, and `value`. Has a length.'''
+    '''A basic 52-card deck. Is initialized unshuffled; must be shuffled with `.shuffle()` for a randomized deck. Cards are represented as class `Card` with a `rank`, `suit`, and `value`. Has a length.
+    
+    Takes an optional `jokers` argument, which is the number of jokers to add to the top of the deck.'''
 
     RANKS: list[str] = [
         'ace',
@@ -27,8 +30,12 @@ class Deck():
         'clubs'
     ]
 
-    def __init__(self):
+    def __init__(self, jokers: int | None = None):
         self.cards: list[Card] = [Card(rank, suit) for suit in Deck.SUITS for rank in Deck.RANKS]
+        
+        if jokers:
+            joker_cards: list[Card] = [Card('joker') for i in range(jokers)]
+            self.cards.extend(joker_cards)
 
     def __len__(self) -> int:
         return len(self.cards)

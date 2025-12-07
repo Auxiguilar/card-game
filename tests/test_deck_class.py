@@ -5,11 +5,11 @@ from src.cards.card_class import Card
 
 class TestDeckClass(unittest.TestCase):
     def test_init(self):
-        deck: Deck = Deck()
-        self.assertEqual(52, len(deck))
+        deck: Deck = Deck(1)
+        self.assertEqual(53, len(deck))
 
-        top_card = deck.peek() # also checks peek! :)
-        self.assertEqual(str(top_card), 'King of Clubs')
+        top_card = deck.peek()
+        self.assertEqual(str(top_card), 'Joker')
 
     def test_draw(self):
         deck: Deck = Deck()
@@ -53,18 +53,18 @@ class TestDeckClass(unittest.TestCase):
         comparison_deck: Deck = Deck()
         shuffled_deck.shuffle()
 
-        # since I can't find a listNotEqual, making some logic for it
+        # Since I can't find a listNotEqual, making some logic for it.
         try:
             self.assertListEqual(shuffled_deck, comparison_deck) # type: ignore
 
-            # in the extremely unlikely event the above succeeds(fails):
+            # In the extremely unlikely event the above succeeds(fails):
             raise RuntimeError('shuffle() has somehow produced an identical list...')
 
-            # really, I think this is appropriate, since it really means
-            # it works. not that this will ever happen often, or at all...
-            # if it did, that would be a problem, though at least then
+            # Really, I think this is appropriate, since it really means
+            # it works. Not that this will ever happen often, or at all...
+            # If it did, that would be a problem, though at least then
             # you'd know.
         
-        # failure is expected! "failure" is good!
+        # Failure is expected! "Failure" is good!
         except self.failureException:
             pass

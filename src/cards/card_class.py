@@ -3,7 +3,9 @@ from functools import total_ordering
 
 @total_ordering
 class Card():
-    '''A basic card printed as "Rank of Suit". Cards can be easily compared.'''
+    '''A basic card printed as "Rank of Suit". Cards can be easily compared.
+    
+    NB: Joker cards have a `None` value and cannot be compared.'''
 
     VALUES: dict[str, int] = {
         'ace': 1,
@@ -21,12 +23,16 @@ class Card():
         'king': 13
     }
 
-    def __init__(self, rank: str, suit: str):
+    def __init__(self, rank: str, suit: str | None = None):
         self.rank: str = rank
-        self.suit: str = suit
-        self.value: int = Card.VALUES[rank]
+        self.suit: str | None = suit if suit else None
+
+        if suit:
+            self.value: int = Card.VALUES[rank]
 
     def __str__(self) -> str:
+        if self.suit == None:
+            return f'{self.rank.capitalize()}'
         return f'{self.rank.capitalize()} of {self.suit.capitalize()}'
     
     def __repr__(self) -> str:
@@ -35,9 +41,13 @@ class Card():
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Card):
             return NotImplemented
+        elif self.rank == 'joker' or other.rank == 'joker':
+            return NotImplemented
         return (self.rank, self.suit) == (other.rank, other.suit)
     
     def __lt__(self, other: object) -> bool:
         if not isinstance(other, Card):
+            return NotImplemented
+        elif self.rank == 'joker' or other.rank == 'joker':
             return NotImplemented
         return self.value < other.value
