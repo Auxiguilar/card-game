@@ -51,3 +51,10 @@ class Card():
         elif self.rank == 'joker' or other.rank == 'joker':
             return NotImplemented
         return self.value < other.value
+    
+    def __gt__(self, other: object) -> bool:
+        if not isinstance(other, Card):
+            return NotImplemented
+        elif self.rank == 'joker' or other.rank == 'joker':
+            return NotImplemented
+        return self.value > other.value
