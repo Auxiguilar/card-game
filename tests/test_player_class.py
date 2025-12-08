@@ -8,6 +8,7 @@ class TestPlayerClass(unittest.TestCase):
 
         self.assertTrue(hasattr(player, 'name'))
         self.assertTrue(hasattr(player, 'hand'))
+        self.assertTrue(hasattr(player, 'score'))
         self.assertTrue(player.name == 'Player')
 
     def test_str(self):

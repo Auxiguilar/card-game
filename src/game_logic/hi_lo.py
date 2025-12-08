@@ -1,5 +1,6 @@
 from src.cards.card_class import Card
 from src.cards.deck_class import Deck
+from src.player.player_class import Player
 
 
 def get_player_guess() -> str:
@@ -54,7 +55,7 @@ or lower than, or equal to the snap card.
     deck.shuffle()
     snap_card: Card = deck.draw()
 
-    wins, losses = 0, 0
+    player: Player = Player(input('Your name?\n> ').strip())
 
     # Basically, draw a card from the deck, let the player guess how it
     # stacks up to the "snap card", then get the "truth", then compare
@@ -73,7 +74,7 @@ or lower than, or equal to the snap card.
             deck: Deck = Deck()
             deck.shuffle()
 
-        print(f'\nW: {wins}, L: {losses}')
+        print(f'\n{player.name}\'s score: {player.score}')
         drawn_card: Card = deck.draw()
 
         print(f'\nSnap card: {str(snap_card)}\nDrawn card: ???')
@@ -83,14 +84,14 @@ or lower than, or equal to the snap card.
         result: str = compare_cards(drawn_card, snap_card)
 
         if result == player_guess:
-            wins += 1
-            print('Correct guess! >>> W <<<\n')
+            player.score += 1
+            print('Correct guess!\nScore +1\n')
         else:
-            losses += 1
-            print('Wrong guess! >>> L <<<\n')
+            player.score -= 1
+            print('Wrong guess!\nScore -1\n')
 
         if not player_continue():
-            print(f'\nFinal score:\nW: {wins}, L: {losses}')
+            print(f'\n{player.name}\'s final score: {player.score}')
             break
 
         for i in range(3):
