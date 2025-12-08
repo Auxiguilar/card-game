@@ -19,7 +19,7 @@ class TestDeckClass(unittest.TestCase):
         self.assertFalse(hand)
 
         for i in range(hand.capacity):
-            hand.add(deck.draw())
+            hand.add_card(deck.draw_card())
 
         self.assertEqual(len(hand), 5)
 
@@ -30,7 +30,7 @@ class TestDeckClass(unittest.TestCase):
         self.assertFalse(hand)
 
         for i in range(hand.capacity):
-            hand.add(deck.draw())
+            hand.add_card(deck.draw_card())
 
         self.assertEqual(
             str(hand),
@@ -43,25 +43,27 @@ class TestDeckClass(unittest.TestCase):
         hand: Hand = Hand(5)
 
         for i in range(hand.capacity):
-            hand.add(deck.draw())
+            hand.add_card(deck.draw_card())
 
         hand.sort()
-
-        # woops, maybe I should implement some more dunders...
         self.assertLess(hand.cards[0], hand.cards[4])
+
+        # hand.play_card(1)
+        # hand.add_card(Card('joker'))
+        # hand.sort()
 
     def test_draw(self):
         deck: Deck = Deck()
         hand: Hand = Hand(5)
 
         for i in range(hand.capacity):
-            hand.add(deck.draw())
+            hand.add_card(deck.draw_card())
 
         cards: list[Card] = []
         hand_copy: list[Card] = hand.cards.copy()
 
         for j in range(hand.capacity):
-            cards.append(hand.draw(0))
+            cards.append(hand.draw_card(0))
 
         self.assertListEqual(cards, hand_copy)
 
@@ -71,4 +73,4 @@ class TestDeckClass(unittest.TestCase):
         hand: Hand = Hand(5)
 
         for i in range(hand.capacity):
-            hand.add(deck.draw())
+            hand.add_card(deck.draw_card())

@@ -51,7 +51,7 @@ class Deck():
 
         random.shuffle(self.cards)
 
-    def draw(self) -> Card:
+    def draw_card(self) -> Card:
         '''Returns the card at the top of the deck, removing it from the deck.'''
 
         if not self:
@@ -67,7 +67,7 @@ class Deck():
         
         return self.cards[-1]
         
-    def add(self, card: Card, rand: bool = False):
+    def add_card(self, card: Card, rand: bool = False) -> None:
         '''Adds a card to the top of the deck. If `rand == True`, inserts it at a random index in the deck.'''
 
         if rand == True:

@@ -42,7 +42,7 @@ def player_continue() -> bool:
         return False
     return True
 
-def hi_lo_game():
+def hi_lo_game() -> None:
     print(
         '''
 Guess whether the drawn card is higher,
@@ -53,7 +53,7 @@ or lower than, or equal to the snap card.
     deck: Deck = Deck()
 
     deck.shuffle()
-    snap_card: Card = deck.draw()
+    snap_card: Card = deck.draw_card()
 
     player: Player = Player(input('Your name?\n> ').strip())
 
@@ -75,7 +75,7 @@ or lower than, or equal to the snap card.
             deck.shuffle()
 
         print(f'\n{player.name}\'s score: {player.score}')
-        drawn_card: Card = deck.draw()
+        drawn_card: Card = deck.draw_card()
 
         print(f'\nSnap card: {str(snap_card)}\nDrawn card: ???')
         player_guess: str = get_player_guess()
@@ -99,6 +99,6 @@ or lower than, or equal to the snap card.
                 deck: Deck = Deck()
                 deck.shuffle()
 
-            deck.draw()
+            deck.draw_card()
 
         snap_card = drawn_card

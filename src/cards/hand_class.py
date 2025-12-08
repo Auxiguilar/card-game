@@ -20,12 +20,12 @@ class Hand():
     def __repr__(self) -> str:
         return f'Hand(capacity={self.capacity if hasattr(self, 'capacity') else None})'
 
-    def sort(self):
+    def sort(self) -> None:
         '''Sorts the deck according to card value.'''
 
-        self.cards.sort() # huh??
+        self.cards.sort()
 
-    def add(self, card: Card):
+    def add_card(self, card: Card) -> None:
         '''Adds a card to the hand. Does not call sort.'''
 
         if len(self) >= self.capacity:
@@ -33,7 +33,7 @@ class Hand():
 
         self.cards.append(card)
 
-    def draw(self, pos: int) -> Card:
+    def draw_card(self, pos: int) -> Card:
         '''Draws a card from the hand at the given index, removing it from the hand.'''
 
         if not self.cards:

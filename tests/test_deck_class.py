@@ -13,28 +13,28 @@ class TestDeckClass(unittest.TestCase):
 
     def test_draw(self):
         deck: Deck = Deck()
-        card: Card = deck.draw()
+        card: Card = deck.draw_card()
         self.assertEqual(str(card), 'King of Clubs')
         self.assertEqual(len(deck), 51)
 
         deck.cards = []
 
         with self.assertRaises(IndexError):
-            draw_empty: Card = deck.draw()
+            draw_empty: Card = deck.draw_card()
     
     def test_add(self):
         deck_1: Deck = Deck()
         deck_2: Deck = Deck()
 
-        card = deck_1.draw()
-        deck_2.add(card)
+        card = deck_1.draw_card()
+        deck_2.add_card(card)
 
         self.assertEqual(51, len(deck_1))
         self.assertEqual(53, len(deck_2))
 
         deck_3: Deck = Deck()
         card_card: Card = Card('queen', 'hearts')
-        deck_3.add(card=card_card)
+        deck_3.add_card(card=card_card)
         self.assertEqual(card_card, deck_3.peek())
 
     def test_len(self):
