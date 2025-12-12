@@ -28,8 +28,9 @@ class Hand():
     def add_card(self, card: Card) -> None:
         '''Adds a card to the hand. Does not call sort.'''
 
-        if len(self) >= self.capacity:
-            raise IndexError(f'Hand is full. Capacity: {self.capacity}')
+        if hasattr(self, 'capacity'):
+            if len(self) >= self.capacity:
+                raise IndexError(f'Hand is full. Capacity: {self.capacity}')
 
         self.cards.append(card)
 

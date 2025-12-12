@@ -55,7 +55,7 @@ or lower than, or equal to the snap card.
     deck.shuffle()
     snap_card: Card = deck.draw_card()
 
-    player: Player = Player(input('Your name?\n> ').strip())
+    player: Player = Player(input('Your name?\n> ').strip(), 0)
 
     # Basically, draw a card from the deck, let the player guess how it
     # stacks up to the "snap card", then get the "truth", then compare
